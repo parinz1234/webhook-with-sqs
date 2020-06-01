@@ -35,9 +35,9 @@ app.post('/webhook', async (req, res) => {
 });
 
 events.on('start:pulling:sqs', async () => {
+  // keep pulling SQS queue
   while (true) {
-    // keep pulling SQS queue
-    const maxNumberOfMessages = 1; // Max number of messages to be read.
+    const maxNumberOfMessages = 10; // Max number of messages to be read.
     const visibilityTimeout = 30; // If a read message is not dequeued from queue, number of seconds before it make available for other consumer to read.
     const waitTimeSeconds = 5; // Long-pooling conn period, close on new message(s) arrival or timeout.
     const params = {
@@ -47,7 +47,15 @@ events.on('start:pulling:sqs', async () => {
       QueueUrl: QUEUE_URL
     };
     const response = await sqs.receiveMessage(params).promise();
-    console.log(response);
+    const messages = response.Messages || [];
+    for (let i = 0; i < messages.length; i++) {
+      const payload = messages[i].Body;
+      const receiptHandle = messages[i].ReceiptHandle;
+      console.log(`payload`);
+      console.log(payload);
+      console.log(`receiptHandle`);
+      console.log(receiptHandle);
+    }
   }
 });
 
