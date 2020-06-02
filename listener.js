@@ -11,9 +11,9 @@ events.on('start:pulling:sqs', async () => {
     const visibilityTimeout = 30; // If a read message is not dequeued from queue, number of seconds before it make available for other consumer to read.
     const messages = await webhookQueue.receive(maxNumberOfMessages, waitTimeSeconds, visibilityTimeout);
     for (let i = 0; i < messages.length; i++) {
-      const payload = JSON.parse(messages[i].Body);
+      const webhookContext = JSON.parse(messages[i].Body);
       const receiptHandle = messages[i].ReceiptHandle;
-      events.emit(WebhookArrivedEventType, new WebhookArrivedEvent({ webhookContext: payload, receiptHandle }))
+      events.emit(WebhookArrivedEventType, new WebhookArrivedEvent({ webhookContext: webhookContext, receiptHandle }));
     }
   }
 });

@@ -1,8 +1,10 @@
 class SecondAPI {
   async makeRequest(payload) {
-    console.log('Second Partner API');
+    console.log('2nd Partner API');
     console.log(payload);
-    return 200;
+    return {
+      status: 400
+    };
   }
 }
 

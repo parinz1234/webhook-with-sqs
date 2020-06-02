@@ -61,7 +61,7 @@ class SQSWebhookQueue {
     try {
       const params = {
         ReceiptHandle: receiptHandle,
-        QueueUrl: this.url
+        QueueUrl: this._url
       };
       const response = await this._sqs.deleteMessage(params).promise();
       return response;
