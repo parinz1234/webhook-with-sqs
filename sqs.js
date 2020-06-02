@@ -45,7 +45,7 @@ class SQSWebhookQueue {
         MessageBody: JSON.stringify(message),
         QueueUrl: this._url
       }
-      const response = await sqs.sendMessage(params).promise();
+      const response = await this._sqs.sendMessage(params).promise();
       return response
     } catch (err) {
       console.log(err);
@@ -63,7 +63,7 @@ class SQSWebhookQueue {
         ReceiptHandle: receiptHandle,
         QueueUrl: this.url
       };
-      const response = await sqs.deleteMessage(params).promise();
+      const response = await this._sqs.deleteMessage(params).promise();
       return response;
     } catch (err) {
       console.log(err);
