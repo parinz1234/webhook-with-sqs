@@ -11,9 +11,8 @@ app.post('/webhook', async (req, res) => {
         const webhookPayload = req.body.webhook_payload;
         const partnerId = req.body.partner_id;
         const response = await publishWebhookToQueue(partnerId, webhookPayload);;
-        console.log(response);
-        res.status(200).json();
-    } catch (e) {
+        res.status(200).json(response);
+    } catch (err) {
         console.log(err);
         res.status(400).json(err);
     }

@@ -1,4 +1,4 @@
-const event = require('../../listener');
+const event = require('../../../listener');
 const { publishWebhookToPartner } = require('../../use-cases');
 
 const WebhookArrivedHandler = require('./webhook-arrived.handler');
