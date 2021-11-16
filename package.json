@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/parinz1234/webhook-with-sqs#readme",
   "dependencies": {
-    "aws-sdk": "^2.686.0",
+    "aws-sdk": "^2.814.0",
     "dotenv": "^8.2.0",
     "eventemitter3": "^4.0.4",
     "express": "^4.17.1"
